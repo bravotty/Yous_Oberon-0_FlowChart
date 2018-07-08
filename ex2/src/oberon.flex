@@ -1,10 +1,9 @@
-/* this is a oberon_0 lexical */
+/* Oberon Lexical Program*/
 /*
-author: you
-date: 2018/06/22
+Author: tyty
+Date: 2018/07/01
 */
 /* --------------------------Usercode Section------------------------ */
-/* import java_cup.runtime.*; */
 
 import java.io.*;
 import exceptions.*;
@@ -17,7 +16,7 @@ import exceptions.*;
    The name of the class JFlex will create will be Lexer.
    Will write the code to the file Lexer.java. 
 */
-%class OberonScanner
+%class OberonComplierProgram
 %type int
 %unicode
 %ignorecase
@@ -63,12 +62,12 @@ import exceptions.*;
 
     int get_line()
     {
-	return yyline;
+	     return yyline;
     }
 
     int get_column()
     {
-	return yycolumn;
+	     return yycolumn;
     }
 
 %}
@@ -163,11 +162,11 @@ IllegalComment = "(*" ([^\*] | "*"+[^\)])* | ([^\(]|"("+[^\*])* "*)"
 	
 	{ Comment }		{ return OberonLexical.Comment; }
 
-	{IllegalComment}	{ throw new IllegalCommentException(); }
+	{ IllegalComment}	{ throw new IllegalCommentException(); }
 	
-	{IllegalIdentifier}	{ throw new IllegalIdentifierException(); }
+	{ IllegalIdentifier}	{ throw new IllegalIdentifierException(); }
 	
-	{IllegalNumber}		{ throw new IllegalOctalException(); }	
+	{ IllegalNumber}		{ throw new IllegalOctalException(); }	
 
 	{ Reserved_word } 	{ return OberonLexical.Reserved_word; }
 

@@ -1,0 +1,62 @@
+(* Oberon-0 Hello World program *)
+
+MODULE BinaryInsertSort;
+	unsortedarray: ARRAY 8 OF INTEGER;
+	unsortedarray[0] := 8;
+	unsortedarray[1] := 6;
+	unsortedarray[2] := 2;
+	unsortedarray[3] := 1;
+	unsortedarray[4] := 4;
+	unsortedarray[5] := 5;
+	unsortedarray[6] := 3;
+	unsortedarray[7] := 9;
+
+	PROCEDURE binarySort ();
+		VAR right : INTEGER;
+		VAR middle : INTEGER;
+		VAR left : INTEGER;
+		VAR length : INTEGER;
+		VAR I : INTEGER;
+		VAR J : INTEGER;
+		VAR num : INTEGER;
+		length := 8;
+		I := 0
+	BEGIN
+		WHILE I < length DO
+			left := 0;
+			right := I - 1;
+			middle := unsortedarray[I];
+			WHILE left <= right DO
+				num := (left + right) DIV 2;
+				IF num > middle THEN
+					right :=  num - 1;
+				ELSE
+					left = num + 1; 
+			END;
+			J := I;
+			WHILE J > left DO
+				unsortedarray[J] := unsortedarray[J-1];
+			END;
+		END;
+	END binarySort;
+
+	PROCEDURE judgeFlag (VAR x : INTEGER);
+		recordArray : ARRAY 100 OF RECORD;
+			account: INTEGER;
+			balance: INTEGET;
+		VAR flag : BOOLEAN;
+	BEGIN
+		Read(flag)
+		recordArray[25].account := 20;
+		recordArray[25].balance := 10;
+		IF flag==FLASE THEN
+			recordArray[25].account := x MOD 10;
+		ELSE
+			recordArray[25].balance := x DIV 5;
+		END
+		(* print the record*)
+		Write(recordArray[25].account);Write(recordArray[25].balance);Writeln
+	END judgeFlag
+
+END BinaryInsertSort.
+(* Author : tyty  date : 2018-6-21*)

@@ -31,12 +31,12 @@ public static void main(String argv[])
 						break;
 					}
 					if (return_id > 0 && return_id != OberonLexical.WhiteSpace);	//token is valid,do nothing
-						//System.out.println(return_id +" : " + scanner.yytext());
 					else
 					{
 						if (return_id == 0)
 						{
-							System.out.println("Congratulation!!! There is not lexical error in" + argv[i]);
+							System.out.println("---(0)ERRORS, (0)WARNINGS---.");
+							System.out.println("There is no lexical error in " + argv[i]);
 							break;
 						}
 					}
