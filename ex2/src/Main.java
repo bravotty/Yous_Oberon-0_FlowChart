@@ -4,24 +4,24 @@ public class Main
 {
 public static void main(String argv[]) 
 {
-	int return_id;
+	int IDReturn;
 	if (argv.length == 0)
 	{
-		System.out.println("There need a parameter(s), Usage: java Main <*.obr>");
+		System.out.println("Parameter(s), Usage: java Main <*.obr>");
 	}
 	else
 	{
 		for (int i = 0; i < argv.length; i++)
 		{
-			OberonScanner scanner = null;
+			OberonComplierProgram scanner = null;
 			try
 			{
-				scanner = new OberonScanner(new java.io.FileReader(argv[i]));
+				scanner = new OberonComplierProgram(new java.io.FileReader(argv[i]));
 				while (true)
 				{
 					try
 					{
-						return_id = scanner.yylex();
+						IDReturn = scanner.yylex();
 					}
 					catch (LexicalException ex)
 					{
@@ -30,12 +30,13 @@ public static void main(String argv[])
 						System.out.println(scanner.yytext()+"\n");
 						break;
 					}
-					if (return_id > 0 && return_id != OberonLexical.WhiteSpace);	//token is valid,do nothing
+					if (IDReturn > 0 && IDReturn != OberonLexical.WhiteSpace);	//token is valid,do nothing]
+					
 					else
 					{
-						if (return_id == 0)
+						if (IDReturn == 0)
 						{
-							System.out.println("---(0)ERRORS, (0)WARNINGS---.");
+							System.out.println("---(0)ERRORS,(0)WARNINGS---.");
 							System.out.println("There is no lexical error in " + argv[i]);
 							break;
 						}

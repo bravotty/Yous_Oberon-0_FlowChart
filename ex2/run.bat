@@ -1,3 +1,3 @@
 cd bin
-java Main ..\src\testcases\cocktail_sort.obr
+java Main ..\src\testcases\BinaryInsertSort_JudgeFlag.obr
 pause

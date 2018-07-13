@@ -798,15 +798,15 @@ public class OberonComplierProgram {
             }
           case 20: break;
           case 3: 
-            { return OberonLexical.Relational_operator;
+            { return OberonLexical.Relation_operator;
             }
           case 21: break;
           case 4: 
-            { return OberonLexical.Addictive_operator;
+            { return OberonLexical.Add_operator;
             }
           case 22: break;
           case 5: 
-            { return OberonLexical.Multiplicative_operator;
+            { return OberonLexical.Multi_operator;
             }
           case 23: break;
           case 6: 

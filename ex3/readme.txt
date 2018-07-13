@@ -1,10 +1,8 @@
-姓名：游森榕
-学号：20152100048
-邮箱：yousenrong@gmail.com
-完成日期：2018/07/01
-
-补充：
-本分词法，语法，语义分析器没有提供错误测试用例，可通过对正确测试用例进行修改得到错误测试用例。
-ex3\graph\*	中是绘制函数流程图的接口包
-ex3\javacup\*	中是JavaCup工具包
-ex3\jflex\*	中是jflex工具包
+姓名：陈天一
+学号：20152100199
+邮箱：tychen@m.scnu.edu.cn
+完成日期：2018/07/10
+目录结构：
+ex3\graph\*	存放绘制函数流程图的接口包
+ex3\javacup\*	存放Javacup工具包
+ex3\jflex\*	存放Jflex工具包

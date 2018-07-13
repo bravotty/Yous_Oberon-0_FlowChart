@@ -12,13 +12,12 @@ public class Main
 		{
 			for (int i = 0; i < args.length; i++) 
 			{
-				OberonScanner oberonScanner = new OberonScanner(new java.io.FileReader(args[i]));
+				OberonComplierProgram oberonScanner = new OberonComplierProgram(new java.io.FileReader(args[i]));
 				Parser parser=new Parser(oberonScanner);
 				System.out.println(args[i] + ":");
 				try
 				{	
 					parser.parse();
-					/*parser.debug_parse();*/
 				}
 				catch(Exception e)
 				{

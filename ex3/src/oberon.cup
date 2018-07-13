@@ -1,23 +1,21 @@
-/* this is a oberon.cup */
+/* Oberon Cup Code File */
 /*
-author: you
-date: 2018/06/26
+Author: tyty
+date: 2018/07/07
 */
 
 /* ----------------------Preliminary Declarations Section--------------------*/
 import java_cup.runtime.*;
 import java.util.*;
 import exceptions.*;
-import callgraph.*;
 import flowchart.*;
 parser code
 {:
 	// 绘制函数流程图的接口类
-	Module main_Module;
+	flowchart.Module main_Module;
 	// 绘制函数流程图的函数主体的类
 	Procedure procedure;
-	/* 绘制函数流程图中while循环部分的WhileStatement对象的栈和IfStatement对象的栈，
-	因为while循环可能会有多层循环或者if语句条件判断的多层嵌套 */
+	/*while循环可能会有多层循环或者if语句条件判断的多层嵌套 */
 	Stack<WhileStatement> while_stack;
 	Stack<IfStatement>  if_stack;
 	/* a stack to store the current state of the statement 0:procedure, 1:while_statement, 2:if_statement */
@@ -26,14 +24,11 @@ parser code
 	HashMap<String, String> newtype_type_HashMap;
 	// 变量和变量类型的HashMap
 	HashMap<String, String> identifier_type_HashMap;
-
-	
-
 :}
 
 init with 
 {:
-	main_Module = new Module("Oberon-0 FlowChart");
+	main_Module = new flowchart.Module("Oberon-0 FlowChart");
 	while_stack = new Stack();
 	if_stack = new Stack();
 	int_stack = new Stack();
@@ -43,7 +38,6 @@ init with
 
 scan with {: return getScanner().next_token(); :};
 	
-
 
 /* ------------Declaration of Terminals and Non Terminals Section----------- */
 /* Terminals (tokens returned by the scanner).  */
@@ -126,8 +120,9 @@ precedence left 	LPARENTHESES;
 
 program ::= module:m
 	{:
-		System.out.println("Congratulation!!! There is no error in your program.");
-		System.out.println("Drawing Flowchart, please wait...");
+		System.out.println("---(0)ERRORs,(0)WARNINGS---");
+		System.out.println("Flowchart Drawing...");
+		System.out.println("Please    Wait   ...");
 		main_Module.show();
 	:};
 

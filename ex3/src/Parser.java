@@ -6,7 +6,6 @@
 import java_cup.runtime.*;
 import java.util.*;
 import exceptions.*;
-import callgraph.*;
 import flowchart.*;
 import java_cup.runtime.XMLElement;
 
@@ -434,7 +433,7 @@ public class Parser extends java_cup.runtime.lr_parser {
   public void user_init() throws java.lang.Exception
     {
 
-	main_Module = new Module("Oberon-0 FlowChart");
+	main_Module = new flowchart.Module("Oberon-0 FlowChart");
 	while_stack = new Stack();
 	if_stack = new Stack();
 	int_stack = new Stack();
@@ -451,23 +450,19 @@ public class Parser extends java_cup.runtime.lr_parser {
     }
 
 
-	// »æÖÆº¯ÊıÁ÷³ÌÍ¼µÄ½Ó¿ÚÀà
-	Module main_Module;
-	// »æÖÆº¯ÊıÁ÷³ÌÍ¼µÄº¯ÊıÖ÷ÌåµÄÀà
+	// ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä½Ó¿ï¿½ï¿½ï¿½
+	flowchart.Module main_Module;
+	// ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	Procedure procedure;
-	/* »æÖÆº¯ÊıÁ÷³ÌÍ¼ÖĞwhileÑ­»·²¿·ÖµÄWhileStatement¶ÔÏóµÄÕ»ºÍIfStatement¶ÔÏóµÄÕ»£¬
-	ÒòÎªwhileÑ­»·¿ÉÄÜ»áÓĞ¶à²ãÑ­»·»òÕßifÓï¾äÌõ¼şÅĞ¶ÏµÄ¶à²ãÇ¶Ì× */
+	/*whileÑ­ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½Ğ¶ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ÏµÄ¶ï¿½ï¿½Ç¶ï¿½ï¿½ */
 	Stack<WhileStatement> while_stack;
 	Stack<IfStatement>  if_stack;
 	/* a stack to store the current state of the statement 0:procedure, 1:while_statement, 2:if_statement */
 	Stack<Integer> int_stack;
-	// ÀàĞÍ±ğÃûºÍ»ù±¾ÀàĞÍ(INTEGER, BOOLEAN)µÄHashMap
+	// ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(INTEGER, BOOLEAN)ï¿½ï¿½HashMap
 	HashMap<String, String> newtype_type_HashMap;
-	// ±äÁ¿ºÍ±äÁ¿ÀàĞÍµÄHashMap
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½HashMap
 	HashMap<String, String> identifier_type_HashMap;
-
-	
-
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -502,8 +497,9 @@ class CUP$Parser$actions {
 		int mright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String m = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-		System.out.println("Congratulation!!! There is no error in your program.");
-		System.out.println("Drawing Flowchart, please wait...");
+		System.out.println("---(0)ERRORs,(0)WARNINGS---");
+		System.out.println("Flowchart Drawing...");
+		System.out.println("Please    Wait   ...");
 		main_Module.show();
 	
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -584,9 +580,9 @@ class CUP$Parser$actions {
 		String p_d = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 				/* 
-				ÒòÎª²»»æÖÆÄ£¿éÖĞµÄ¶«Î÷£¬ËùÒÔÒÔ×´Ì¬Õ»int_stackÖĞÊÇ·ñÓĞÖµÎª±êÖ¾£¬²é¿´µ±Ç°µÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏóµÄ·¶Î§¡£
-				×´Ì¬Õ»ÖĞ²»Îª¿Õ£¬Ôò±íÊ¾µ±Ç°Á÷³ÌÍ¼»æÖÆ·¶Î§ÔÚº¯ÊıÖĞ£¬Ä¿Ç°µÄdeclaration¿ÉÒÔÌí¼Óµ½Á÷³ÌÍ¼ÖĞ£¬Èç¹ûÎª¿Õ£¬Ôò±êÖ¾
-				µ±Ç°¶ÔÏó»æÖÆ·¶Î§ÎªÄ£¿émodule¡£
+				ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ĞµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬Õ»int_stackï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ÖµÎªï¿½ï¿½Ö¾ï¿½ï¿½ï¿½é¿´ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ä·ï¿½Î§ï¿½ï¿½
+				×´Ì¬Õ»ï¿½Ğ²ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ·ï¿½Î§ï¿½Úºï¿½ï¿½ï¿½ï¿½Ğ£ï¿½Ä¿Ç°ï¿½ï¿½declarationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ö¾
+				ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Î§ÎªÄ£ï¿½ï¿½moduleï¿½ï¿½
 				*/
 				if(!int_stack.empty())
 				{
@@ -890,10 +886,10 @@ class CUP$Parser$actions {
 		int fpright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String fp = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-				// Á÷³ÌÍ¼µÄ´ÓÕâÀï¿ªÊ¼£¬Ïòint_stackÖĞÑ¹Èë0£¬±íÊ¾µ±Ç°µÄÁ÷³ÌÍ¼Î»ÖÃÊÇº¯Êı
+				// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿ªÊ¼ï¿½ï¿½ï¿½ï¿½int_stackï¿½ï¿½Ñ¹ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Î»ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½
 				int_stack.push(new Integer(0));
 				procedure = main_Module.add(identifier);
-				// ·µ»ØÍ·²¿º¯ÊıÃû£¬ÒÔ±ã¼ì²éº¯ÊıÃûÊÇ·ñÆ¥Åä
+				// ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½éº¯ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Æ¥ï¿½ï¿½
 				RESULT = identifier;
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("procedure_heading",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1190,11 +1186,11 @@ class CUP$Parser$actions {
 		String identifier = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 				/*
-				º¯Êı½áÊø£¬´Ó×´Ì¬Õ»int_stackÖĞµ¯³öÕ»¶¥£¬±íÊ¾Ò»¸öº¯Êı»æÖÆ½áÊø£¬
-				Òò´Ëµ±Ò»¸öº¯ÊıµÄÁ÷³ÌÍ¼»æÖÆ½áÊøÊ±£¬int_stackÕ»Îª¿Õ¡£
+				ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬Õ»int_stackï¿½Ğµï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½
+				ï¿½ï¿½Ëµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½int_stackÕ»Îªï¿½Õ¡ï¿½
 				*/
 				int_stack.pop();
-				// ·µ»ØÎ²²¿º¯ÊıÃû£¬ÒÔ±ã¼ì²éº¯ÊıÃûÊÇ·ñÆ¥Åä
+				// ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½éº¯ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Æ¥ï¿½ï¿½
 				RESULT = identifier;
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("procedure_body",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1264,12 +1260,12 @@ class CUP$Parser$actions {
 		String a = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 				/* 
-				ÅĞ¶Ïint_stackÊÇ·ñÎª¿Õ£¬ÊÇÎªÁËÅĞ¶Ïº¯Êı»æÖÆÎ»ÖÃÊÇÔÚprocedure·¶Î§ÄÚ£¬»¹ÊÇÔÚmodule·¶Î§ÄÚ£¬
-				int_stackÎª¿ÕÔòÊÇÔÚmodule·¶Î§ÄÚ£¬int_stack²»Îª¿ÕÔòÊÇÔÚprecedure·¶Î§ÄÚ¡£
+				ï¿½Ğ¶ï¿½int_stackï¿½Ç·ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ğ¶Ïºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½procedureï¿½ï¿½Î§ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½moduleï¿½ï¿½Î§ï¿½Ú£ï¿½
+				int_stackÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½moduleï¿½ï¿½Î§ï¿½Ú£ï¿½int_stackï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½precedureï¿½ï¿½Î§ï¿½Ú¡ï¿½
 				*/
 				if(!int_stack.empty())
 				{	
-					// ÅĞ¶Ïµ±Ç°µÄ»æÖÆÁ÷³ÌÍ¼µÄ×´Ì¬£¬È»ºóÏòµ±Ç°»æÖÆÁ÷³ÌÍ¼µÄ¶ÔÏóÖĞÌí¼ÓÓï¾ä
+					// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if(int_stack.peek() == 0)
 					{
 						procedure.add(new PrimitiveStatement(a));
@@ -1302,12 +1298,12 @@ class CUP$Parser$actions {
 		String p_c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 				/* 
-				ÅĞ¶Ïint_stackÊÇ·ñÎª¿Õ£¬ÊÇÎªÁËÅĞ¶Ïº¯Êı»æÖÆÎ»ÖÃÊÇÔÚprocedure·¶Î§ÄÚ£¬»¹ÊÇÔÚmodule·¶Î§ÄÚ£¬
-				int_stackÎª¿ÕÔòÊÇÔÚmodule·¶Î§ÄÚ£¬int_stack²»Îª¿ÕÔòÊÇÔÚprecedure·¶Î§ÄÚ¡£
+				ï¿½Ğ¶ï¿½int_stackï¿½Ç·ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ğ¶Ïºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½procedureï¿½ï¿½Î§ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½moduleï¿½ï¿½Î§ï¿½Ú£ï¿½
+				int_stackÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½moduleï¿½ï¿½Î§ï¿½Ú£ï¿½int_stackï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½precedureï¿½ï¿½Î§ï¿½Ú¡ï¿½
 				*/
 				if(!int_stack.empty())
 				{
-					// ÅĞ¶Ïµ±Ç°µÄ»æÖÆÁ÷³ÌÍ¼µÄ×´Ì¬£¬È»ºóÏòµ±Ç°»æÖÆÁ÷³ÌÍ¼µÄ¶ÔÏóÖĞÌí¼ÓÓï¾ä
+					// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if(int_stack.peek() == 0)
 					{
 						procedure.add(new PrimitiveStatement(p_c));
@@ -1368,14 +1364,14 @@ class CUP$Parser$actions {
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 	
 				/*
-				»æÖÆwhileÑ­»·ÖĞµÄÁ÷³ÌÍ¼
+				ï¿½ï¿½ï¿½ï¿½whileÑ­ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 				*/
-				// ÉùÃ÷Ò»¸öwhileÑ­»·Á÷³ÌÍ¼µÄ¶ÔÏó
+				// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½whileÑ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½
 				WhileStatement wstmt = new WhileStatement(e);
-				// ÅĞ¶Ïµ±Ç°ÊÇ·ñÔÚprocedureÖĞ
+				// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ç·ï¿½ï¿½ï¿½procedureï¿½ï¿½
 				if(!int_stack.empty())
 				{
-					// ÅĞ¶Ïµ±Ç°µÄ»æÖÆÁ÷³ÌÍ¼µÄ×´Ì¬£¬È»ºóÏòµ±Ç°»æÖÆÁ÷³ÌÍ¼µÄ¶ÔÏóÖĞÌí¼ÓwhileÑ­»·Á÷³ÌÍ¼»æÖÆ¶ÔÏó
+					// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½whileÑ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 					if(int_stack.peek() == 0)
 					{
 						procedure.add(wstmt);
@@ -1393,9 +1389,9 @@ class CUP$Parser$actions {
 						if_stack.peek().getFalseBody().add(wstmt);
 					}
 				}
-				// ÏòÕ»ÖĞpushÒ»¸öÕûÊı1£¬±íÊ¾ÏÖÔÚµÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó×ª»»ÎªwhileÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½pushÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªwhileï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				int_stack.push(new Integer(1));
-				// ÏòÕ»ÖĞÌí¼Ó¶ÔÏówhileÑ­»·µÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½whileÑ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				while_stack.push(wstmt);
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$0",43, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1412,9 +1408,9 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		
-				// while Ñ­»·½áÊøµ¯³ö×´Ì¬±êÖ¾
+				// while Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ö¾
 				int_stack.pop();
-				// while Ñ­»·½áÊøµ¯³öwhileÑ­»·Á÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// while Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½whileÑ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				while_stack.pop();
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("while_statement",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1430,14 +1426,14 @@ class CUP$Parser$actions {
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 
 				/*
-				»æÖÆifÌõ¼şÓï¾äµÄÁ÷³ÌÍ¼
+				ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 				*/
-				// ÉùÃ÷Ò»¸öifÌõ¼şÓï¾äÁ÷³ÌÍ¼µÄ¶ÔÏó
+				// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½
 				IfStatement ifstmt = new IfStatement(e);
-				// ÅĞ¶Ïµ±Ç°ÊÇ·ñÔÚprocedureÖĞ
+				// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ç·ï¿½ï¿½ï¿½procedureï¿½ï¿½
 				if(!int_stack.empty())
 				{
-					// ÅĞ¶Ïµ±Ç°µÄ»æÖÆÁ÷³ÌÍ¼µÄ×´Ì¬£¬È»ºóÏòµ±Ç°»æÖÆÁ÷³ÌÍ¼µÄ¶ÔÏóÖĞÌí¼ÓifÌõ¼şÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+					// ï¿½Ğ¶Ïµï¿½Ç°ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 					if(int_stack.peek() == 0)
 					{
 						procedure.add(ifstmt);
@@ -1455,9 +1451,9 @@ class CUP$Parser$actions {
 						if_stack.peek().getFalseBody().add(ifstmt);
 					}
 				}
-				// ÏòÕ»ÖĞpushÒ»¸öÕûÊı2£¬±íÊ¾ÏÖÔÚµÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó×ª»»ÎªifÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½pushÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªifï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				int_stack.push(new Integer(2));
-				// ÏòÕ»ÖĞÌí¼ÓifÓï¾äµÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				if_stack.push(ifstmt);
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$1",44, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1474,9 +1470,9 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
 		
-				// ifÓï¾ä½áÊøµ¯³ö×´Ì¬±êÖ¾
+				// ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ö¾
 				int_stack.pop();
-				// ifÓï¾ä½áÊøµ¯³öifÓï¾äÁ÷³ÌÍ¼»æÖÆÍ¼Ïñ
+				// ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 				if_stack.pop();
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("if_statement",7, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1495,15 +1491,15 @@ class CUP$Parser$actions {
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 
 				/*
-				»æÖÆelsifÌõ¼şÓï¾äµÄÁ÷³ÌÍ¼
+				ï¿½ï¿½ï¿½ï¿½elsifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 				*/
-				// ÉùÃ÷Ò»¸öifÌõ¼şÓï¾äÁ÷³ÌÍ¼µÄ¶ÔÏó
+				// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ä¶ï¿½ï¿½ï¿½
 				IfStatement ifstmt = new IfStatement(e);
-				// °ÑifÌõ¼şÓï¾äÁ÷³ÌÍ¼¶ÔÏóÌí¼Óµ½ÉÏÒ»²ãifÓï¾äµÄfalse·ÖÖ§ÖĞ
+				// ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ò»ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½falseï¿½ï¿½Ö§ï¿½ï¿½
 				if_stack.peek().getFalseBody().add(ifstmt);
-				// ÏòÕ»ÖĞpushÒ»¸öÕûÊı2£¬±íÊ¾ÏÖÔÚµÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó×ª»»ÎªifÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½pushÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªifï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				int_stack.push(new Integer(2));
-				// ÏòÕ»ÖĞÌí¼ÓifÓï¾äµÄÁ÷³ÌÍ¼»æÖÆ¶ÔÏó
+				// ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
 				if_stack.push(ifstmt);
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$2",45, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1523,9 +1519,9 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
 		
-				// ifÓï¾ä½áÊøµ¯³ö×´Ì¬±êÖ¾
+				// ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ö¾
 				int_stack.pop();
-				// ifÓï¾ä½áÊøµ¯³öifÓï¾äÁ÷³ÌÍ¼»æÖÆÍ¼Ïñ
+				// ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ifï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 				if_stack.pop();
 				
 			
@@ -1552,7 +1548,7 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String e = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 
-				// Ïò×´Ì¬Õ»int_stackÖĞÌí¼ÓÒ»¸ö3£¬±íÊ¾ÏÖÔÚµÄÁ÷³ÌÍ¼»æÖÆ×´Ì¬Ó¦¸ÃÌí¼Óµ½ifÓï¾äµÄfalse·ÖÖ§
+				// ï¿½ï¿½×´Ì¬Õ»int_stackï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½×´Ì¬Ó¦ï¿½ï¿½ï¿½ï¿½Óµï¿½ifï¿½ï¿½ï¿½ï¿½falseï¿½ï¿½Ö§
 				int_stack.push(new Integer(3));
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$3",46, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1572,7 +1568,7 @@ class CUP$Parser$actions {
 		int s_sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String s_s = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-				// µ¯³ö×´Ì¬Õ»ÖĞµÄÒ»¸ö×´Ì¬
+				// ï¿½ï¿½ï¿½ï¿½×´Ì¬Õ»ï¿½Ğµï¿½Ò»ï¿½ï¿½×´Ì¬
 				int_stack.pop();
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("else_statement",9, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -1804,7 +1800,7 @@ class CUP$Parser$actions {
 		int lessright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String less = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-				// "&lt"±íÊ¾Ğ¡ÓÚºÅ<,Ö±½ÓĞ©"<"ÔÚÁ÷³ÌÍ¼ÖĞÎŞ·¨ÏÔÊ¾
+				// "&lt"ï¿½ï¿½Ê¾Ğ¡ï¿½Úºï¿½<,Ö±ï¿½ï¿½Ğ©"<"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½Ê¾
 				RESULT = "&lt" ;
 			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("expression_operator",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

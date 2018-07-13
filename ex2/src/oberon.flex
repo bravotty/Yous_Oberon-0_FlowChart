@@ -86,13 +86,13 @@ Reserved_word = "MODULE" | "PROCEDURE" | "CONST" | "TYPE" | "VAR" | "RECORD" | "
 Logic_operator = "OR" | "&" | "~"
 
 /* This is relational opetator */
-Relational_operator = "=" | "#" | "<" | "<=" | ">" | ">="
+Relation_operator = "=" | "#" | "<" | "<=" | ">" | ">="
 
 /* This is addictive operator */
-Addictive_operator = "+" | "-"
+Add_operator = "+" | "-"
 
 /* This is multiplicative operator */
-Multiplicative_operator = "*" | "DIV" | "MOD"
+Multi_operator = "*" | "DIV" | "MOD"
 
 /* This is type operator */
 Type_operator = ":"
@@ -172,11 +172,11 @@ IllegalComment = "(*" ([^\*] | "*"+[^\)])* | ([^\(]|"("+[^\*])* "*)"
 
 	{ Logic_operator }	{ return OberonLexical.Logic_operator; }
 
-	{ Relational_operator }	{ return OberonLexical.Relational_operator; }
+	{ Relation_operator }	{ return OberonLexical.Relation_operator; }
 	
-	{ Addictive_operator }	{ return OberonLexical.Addictive_operator; }
+	{ Add_operator }	{ return OberonLexical.Add_operator; }
 
-	{ Multiplicative_operator }	{ return OberonLexical.Multiplicative_operator; }
+	{ Multi_operator }	{ return OberonLexical.Multi_operator; }
 
 	{ Type_operator }	{ return OberonLexical.Type_operator; }
 

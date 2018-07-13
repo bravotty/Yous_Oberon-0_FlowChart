@@ -1,9 +1,8 @@
-/* this is a oberon_0 flex */
+/* Oberon Lexical Program*/
 /*
-author: you
-date: 2018/06/25
+Author: tyty
+Date: 2018/07/01
 */
-
 /* --------------------------Usercode Section------------------------ */
 
 import java_cup.runtime.*;
@@ -14,7 +13,7 @@ import exceptions.*;
 /* -----------------Options and Declarations Section----------------- */
 
 %public
-%class OberonScanner
+%class OberonComplierProgram
 %cupsym Symbol
 %type java_cup.runtime.Symbol
 %unicode
@@ -48,6 +47,7 @@ import exceptions.*;
     
     /* Also creates a new java_cup.runtime.Symbol with information
        about the current token, but this object has a value. */
+       
     private java_cup.runtime.Symbol symbol(int type, Object value) {
         return new java_cup.runtime.Symbol(type, yyline, yycolumn, value);
     }
@@ -77,13 +77,13 @@ Reserved_word = "MODULE" | "PROCEDURE" | "CONST" | "TYPE" | "VAR" | "RECORD" | "
 Logic_operator = "OR" | "&" | "~"
 
 /* This is relational opetator */
-Relational_operator = "=" | "#" | "<" | "<=" | ">" | ">="
+Relation_operator = "=" | "#" | "<" | "<=" | ">" | ">="
 
 /* This is addictive operator */
-Addictive_operator = "+" | "-"
+Add_operator = "+" | "-"
 
 /* This is multiplicative operator */
-Multiplicative_operator = "*" | "DIV" | "MOD"
+Multi_operator = "*" | "DIV" | "MOD"
 
 /* This is type operator */
 Type_operator = ":"
@@ -139,10 +139,6 @@ IllegalComment = "(*" ([^\*] | "*"+[^\)])+ | ([^\(]|"("+[^\*])+"*)"
 %%
 /* ------------------------Lexical Rules Section---------------------- */
 
-/*
-   This section contains regular expressions and actions, i.e. Java
-   code, that will be executed when the scanner matches the associated
-   regular expression. */
    
    /* YYINITIAL is the state at which the lexer begins scanning.  So
    these regular expressions will only be matched if the scanner is in
@@ -235,8 +231,7 @@ IllegalComment = "(*" ([^\*] | "*"+[^\)])+ | ([^\(]|"("+[^\*])+"*)"
 					}
 				}
 
-	/* Don't do anything if whitespace is found */
-    	{ WhiteSpace }	{ /* just skip what was found, do nothing */ }
+    { WhiteSpace }	{ /* just skip what was found, do nothing */ }
 
 	{ Comment }		{ /* do nothing */ }
 
@@ -247,9 +242,8 @@ IllegalComment = "(*" ([^\*] | "*"+[^\)])+ | ([^\(]|"("+[^\*])+"*)"
 	{IllegalNumber}		{ throw new IllegalOctalException(); }
 
 }
-/* No token was found for the input so through an error.  Print out an
-   Illegal character message with the illegal character that was found. */
-[^]                    { System.out.println("f**k"); throw new IllegalSymbolException(yytext());}
+
+[^]                    { System.out.println("ERROR!"); throw new IllegalSymbolException(yytext());}
 	
 
 

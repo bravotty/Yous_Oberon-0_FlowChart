@@ -3,9 +3,9 @@ public class OberonLexical
 	  /* terminals */
 	  public static final int Reserved_word = 1;
 	  public static final int Logic_operator = 2;
-	  public static final int Relational_operator = 3;
-	  public static final int Addictive_operator = 4;
-	  public static final int Multiplicative_operator = 5;
+	  public static final int Relation_operator = 3;
+	  public static final int Add_operator = 4;
+	  public static final int Multi_operator = 5;
 	  public static final int Type_operator = 6;
 	  public static final int Selected_operator = 7;
 	  public static final int Assign_operator = 8;
